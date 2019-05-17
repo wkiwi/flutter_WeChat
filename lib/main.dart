@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: '微信',
         theme: ThemeData.light().copyWith(
           primaryColor: Color(AppColors.PrimaryColor),
-          cardColor: Color(AppColors.APPCardColor),
+          cardColor: Color(AppColors.CardBgColor),
           backgroundColor: Color(AppColors.BackgroundColor),
         ),
         home: IndexPage(),

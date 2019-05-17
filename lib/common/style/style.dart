@@ -98,4 +98,22 @@ class ICons {
   
   static const IconData ER_CODE = const IconData(
       0xe646, fontFamily: ICons.FONT_FAMILY);
+
+  static const IconData RIGHT = const IconData(
+      0xe60b, fontFamily: ICons.FONT_FAMILY);
+  
+  
+}
+
+class Constants{
+  static const String MENU_MARK_AS_UNREAD = 'MENU_MARK_AS_UNREAD';
+  static const String MENU_MARK_AS_UNREAD_VALUE = '标为未读';
+  static const String MENU_PIN_TO_TOP = 'MENU_PIN_TO_TOP';
+  static const String MENU_PIN_TO_TOP_VALUE = '置顶聊天';
+  static const String MENU_DELETE_CONVERSATION = 'MENU_DELETE_CONVERSATION';
+  static const String MENU_DELETE_CONVERSATION_VALUE = '删除该聊天';
+  static const String MENU_PIN_PA_TO_TOP = 'MENU_PIN_PA_TO_TOP';
+  static const String MENU_PIN_PA_TO_TOP_VALUE = '置顶公众号';
+  static const String MENU_UNSUBSCRIBE = 'MENU_UNSUBSCRIBE';
+  static const String MENU_UNSUBSCRIBE_VALUE = '取消关注';
 }

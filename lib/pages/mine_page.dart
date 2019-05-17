@@ -24,7 +24,7 @@ class _Header extends StatelessWidget {
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(left: ScreenUtil().setWidth(30.0)),
-                  child:  Text(me.name,style: TextStyle(color: Color(AppColors.HeaderCardTitleText),fontSize: ScreenUtil().setSp(50.0)),),
+                  child:  Text(me.name,style: TextStyle(color: Color(AppColors.HeaderCardTitleText),fontSize: ScreenUtil().setSp(40.0)),),
                 ),
                 SizedBox(
                   height: ScreenUtil().setWidth(15.0),
@@ -36,13 +36,13 @@ class _Header extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: <Widget>[
-                            Text('微信号：',style:TextStyle(color: Color(AppColors.HeaderCardDesText),fontSize: ScreenUtil().setSp(30.0)),),
-                            Text(me.account,style:TextStyle(color: Color(AppColors.HeaderCardDesText),fontSize: ScreenUtil().setSp(30.0)),),
+                            Text('微信号：',style:TextStyle(color: Color(AppColors.HeaderCardDesText),fontSize: ScreenUtil().setSp(24.0)),),
+                            Text(me.account,style:TextStyle(color: Color(AppColors.HeaderCardDesText),fontSize: ScreenUtil().setSp(24.0)),),
                           ],
                         ),
                       ),
                       Icon(ICons.ER_CODE,color:Color(AppColors.KeyboardArrowRight) ,),
-                      Icon(Icons.keyboard_arrow_right,color:Color(AppColors.KeyboardArrowRight) ,)
+                      Icon(ICons.RIGHT,color:Color(AppColors.KeyboardArrowRight) ,)
                     ],
                   )
                 ),
@@ -103,6 +103,7 @@ class _Body extends StatelessWidget {
           iconPath: 'assets/images/ic_settings.png',
           title: '设置',
           showDivider: false,
+          description: '账号保护',
           onPressed: (){},
         ),
       ],

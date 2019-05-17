@@ -98,32 +98,37 @@ class IndexPage extends StatelessWidget {
                     },
                   ),
                 ),
-                PopupMenuButton(
-                  icon: Icon(ICons.ADD,color: Color(AppColors.APPBarTextColor),),
-                  itemBuilder: (BuildContext context){
-                    return <PopupMenuItem<ActionItems>>[
-                      PopupMenuItem(
-                        child: _buildPopupMenuItem(Icon(ICons.GROUP_CHAT,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor),),'发起群聊'),
-                        value: ActionItems.GROUP_CHAT,
-                      ),
-                      PopupMenuItem(
-                        child: _buildPopupMenuItem(Icon(ICons.ADD_FRIEND,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'添加朋友'),
-                        value: ActionItems.ADD_FRIEND,
-                      ),PopupMenuItem(
-                        child: _buildPopupMenuItem(Icon(ICons.QR_SCAN,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'扫一扫'),
-                        value: ActionItems.QR_SCAN,
-                      ),PopupMenuItem(
-                        child: _buildPopupMenuItem(Icon(ICons.PAYMENT,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'收付款'),
-                        value: ActionItems.PAYMENT,
-                      ),PopupMenuItem(
-                        child: _buildPopupMenuItem(Icon(ICons.HELP,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'帮助与反馈'),
-                        value: ActionItems.HELP,
-                      )
-                    ];
-                  },
-                  onSelected: (ActionItems selected){
-                    print(selected);
-                  },
+                Theme(
+                  data: ThemeData(
+                    cardColor: Color(AppColors.APPCardColor)
+                  ),
+                  child: PopupMenuButton(
+                    icon: Icon(ICons.ADD,color: Color(AppColors.APPBarTextColor),),
+                    itemBuilder: (BuildContext context){
+                      return <PopupMenuItem<ActionItems>>[
+                        PopupMenuItem(
+                          child: _buildPopupMenuItem(Icon(ICons.GROUP_CHAT,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor),),'发起群聊'),
+                          value: ActionItems.GROUP_CHAT,
+                        ),
+                        PopupMenuItem(
+                          child: _buildPopupMenuItem(Icon(ICons.ADD_FRIEND,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'添加朋友'),
+                          value: ActionItems.ADD_FRIEND,
+                        ),PopupMenuItem(
+                          child: _buildPopupMenuItem(Icon(ICons.QR_SCAN,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'扫一扫'),
+                          value: ActionItems.QR_SCAN,
+                        ),PopupMenuItem(
+                          child: _buildPopupMenuItem(Icon(ICons.PAYMENT,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'收付款'),
+                          value: ActionItems.PAYMENT,
+                        ),PopupMenuItem(
+                          child: _buildPopupMenuItem(Icon(ICons.HELP,size: 22.0,color: Color(AppColors.AppBarPopupMenuTextColor)),'帮助与反馈'),
+                          value: ActionItems.HELP,
+                        )
+                      ];
+                    },
+                    onSelected: (ActionItems selected){
+                      print(selected);
+                    },
+                  ),
                 )
               ],
             ),
