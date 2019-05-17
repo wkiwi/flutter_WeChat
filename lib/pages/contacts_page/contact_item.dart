@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix1;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/contacts.dart';
 import '../../common/style/style.dart';
@@ -50,12 +51,18 @@ class ContactItem extends StatelessWidget {
       return Container();
     }
   }
+  Widget ClipRRectImg(){
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5.0),
+      child: contactItemData.isAvatarFromNet() ?  Image.network(contactItemData.avatar,scale: 1.0,) : Image.asset(contactItemData.avatar),
+    );
+  } 
   Widget Avatar(){
     return Container(
       margin: EdgeInsets.only(left: ScreenUtil().setWidth(25.0),right: ScreenUtil().setWidth(25.0),top:ScreenUtil().setWidth(17.0),bottom:ScreenUtil().setWidth(17.0)),
       width: ScreenUtil().setWidth(80.0),
       height: ScreenUtil().setHeight(66.0),
-      child: contactItemData.isAvatarFromNet() ?  Image.network(contactItemData.avatar,scale: 1.0,) : Image.asset(contactItemData.avatar),
+      child: ClipRRectImg(),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
         color: Colors.black12,

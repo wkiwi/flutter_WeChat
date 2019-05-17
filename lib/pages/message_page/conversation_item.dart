@@ -15,35 +15,71 @@ class ConversationItem extends StatelessWidget {
       padding: EdgeInsets.all(4.0),
       decoration: BoxDecoration(
         color: Color(AppColors.ConversationItemBg),
-        border: Border(
-          bottom: BorderSide(width: 0.5,color: Color(AppColors.DividerColor),)
-        )
       ),
       child: Row(
         mainAxisAlignment:  MainAxisAlignment.center,
         children: <Widget>[
           avatarContainer(conversationItemData),
-          Title(conversationItemData),
-          Tip(conversationItemData)
+          Content(),
         ],
       ),
       
     );
   }
+  Widget Content(){
+    return Expanded(
+      child: Container(
+        height: ScreenUtil().setWidth(130),
+        margin: EdgeInsets.only(left:ScreenUtil().setWidth(20.0)),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 0.5,color: Color(AppColors.DividerColor),)
+          )
+        ),
+        child: Row(
+          children: <Widget>[
+            Title(conversationItemData),
+            Tip(conversationItemData)
+          ],
+        ),
+      ),
+    );
+  }
+  Widget ClipRRectImg(){
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5.0),
+      child: conversationItemData.isAvatarFromNet() ?  Image.network(conversationItemData.avatar,scale: 1.0, fit: BoxFit.cover,) : Image.asset(conversationItemData.avatar, fit: BoxFit.cover,),
+    );
+  } 
 
   Widget Avatar(conversationItemData){
     return Container(
-      child: conversationItemData.isAvatarFromNet() ? Image.network(conversationItemData.avatar,scale: 1.0,): Image.asset(conversationItemData.avatar),
+      margin: EdgeInsets.only(left:ScreenUtil().setWidth(20.0)),
+      child: ClipRRectImg(),
       width: ScreenUtil().setWidth(100),
-      height: ScreenUtil().setHeight(100)
+      height: ScreenUtil().setWidth(100)
     );
   } 
 
   Widget Title(conversationItemData){
     return Expanded(
-      child: ListTile(
-        title: Text(conversationItemData.title,style: TextStyle(fontSize: ScreenUtil().setSp(28.0),color: Color(AppColors.TitleColor))),
-        subtitle: Text(conversationItemData.des,style: TextStyle(fontSize: ScreenUtil().setSp(24.0),color: Color(AppColors.DesTextColor)))
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            conversationItemData.title,
+            style: TextStyle(fontSize: ScreenUtil().setSp(30.0),color: Color(AppColors.TitleColor),fontWeight:FontWeight.w400),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            conversationItemData.des,
+            style: TextStyle(fontSize: ScreenUtil().setSp(24.0),color: Color(AppColors.DesTextColor)),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
       ),
     );
   }
@@ -59,7 +95,8 @@ class ConversationItem extends StatelessWidget {
       _rightArea.add(new Icon(ICons.MUTE_ICON,color: Colors.transparent,size: ScreenUtil().setSp(30),));
     }
     return Container(
-      width:ScreenUtil().setWidth(100),
+      width:ScreenUtil().setWidth(80),
+      margin: EdgeInsets.only(right: ScreenUtil().setWidth(10.0)),
       child: Column(
         children: _rightArea
       ),
@@ -92,7 +129,7 @@ class ConversationItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.0),
         color: Color(AppColors.NotifyDotBg)
       ),
-      child: Text(conversationItemData.unreadMsgCount.toString(),style:TextStyle(fontSize: ScreenUtil().setSp(14),color: Color(AppColors.NotifyDotText))),
+      child: Text(conversationItemData.unreadMsgCount.toString(),style:TextStyle(fontSize: ScreenUtil().setSp(18),color: Color(AppColors.NotifyDotText))),
     );
   }
 
