@@ -89,4 +89,13 @@ class ICons {
   
   static const IconData WINDOWS = const IconData(
       0xe64f, fontFamily: ICons.FONT_FAMILY);
+  
+  static const IconData SEARCH = const IconData(
+      0xe63e, fontFamily: ICons.FONT_FAMILY);
+  
+  static const IconData ADD = const IconData(
+      0xe6d3, fontFamily: ICons.FONT_FAMILY);
+  
+  static const IconData ER_CODE = const IconData(
+      0xe646, fontFamily: ICons.FONT_FAMILY);
 }

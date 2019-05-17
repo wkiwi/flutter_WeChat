@@ -84,7 +84,7 @@ class IndexPage extends StatelessWidget {
         return WillPopScope(
           child: Scaffold(
             appBar: AppBar(
-              title: Text('微信',style: TextStyle(fontSize: 14.0,color: Color(AppColors.APPBarTextColor),),),
+              title: Text('微信',style: TextStyle(fontSize: ScreenUtil().setSp(30.0),color: Color(AppColors.APPBarTextColor),),),
               elevation: 0.0,
               brightness: Brightness.light,
               backgroundColor: Color(AppColors.PrimaryColor),
@@ -92,14 +92,14 @@ class IndexPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(right: 16.0),
                   child: IconButton(
-                    icon: Icon(Icons.search,color: Color(AppColors.APPBarTextColor),),
+                    icon: Icon(ICons.SEARCH,color: Color(AppColors.APPBarTextColor),),
                     onPressed: (){
                       print('点击了搜索按钮');
                     },
                   ),
                 ),
                 PopupMenuButton(
-                  icon: Icon(Icons.add,color: Color(AppColors.APPBarTextColor),),
+                  icon: Icon(ICons.ADD,color: Color(AppColors.APPBarTextColor),),
                   itemBuilder: (BuildContext context){
                     return <PopupMenuItem<ActionItems>>[
                       PopupMenuItem(
