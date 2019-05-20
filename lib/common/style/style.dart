@@ -36,6 +36,11 @@ class AppColors {
   static const  NewTagBg = 0xfffa5251;
   static const  FullWithIconButton = 0xff3d3d3d;
   static const  KeyboardArrowRight = 0xffacacac;
+  static const  TextBobuleRight = 0xff9def71;
+  static const  TextBobuleLeft = 0xffffffff;
+  static const  TextBobule = 0xff3e3e3e;
+  static const  ChatDetailBg = 0xffefefef;
+  static const  ChatTime = 0xffababab;
 }
 
 
@@ -102,7 +107,15 @@ class ICons {
   static const IconData RIGHT = const IconData(
       0xe60b, fontFamily: ICons.FONT_FAMILY);
   
-  
+  static const IconData MENUS = const IconData(
+      0xe60e, fontFamily: ICons.FONT_FAMILY);
+
+  static const IconData FACES = const IconData(
+      0xe88f, fontFamily: ICons.FONT_FAMILY);
+
+  static const IconData VOICE = const IconData(
+      0xe606, fontFamily: ICons.FONT_FAMILY);
+
 }
 
 class Constants{
@@ -116,4 +129,22 @@ class Constants{
   static const String MENU_PIN_PA_TO_TOP_VALUE = '置顶公众号';
   static const String MENU_UNSUBSCRIBE = 'MENU_UNSUBSCRIBE';
   static const String MENU_UNSUBSCRIBE_VALUE = '取消关注';
+}
+
+
+class MessageDetailSelects{
+  static const String MENU_COPY = 'MENU_COPY';
+  static const String MENU_COPY_VALUE = '复制';
+  static const String MENU_SHARE_FRIENDS = 'MENU_SHARE_FRIENDS';
+  static const String MENU_SHARE_FRIENDS_VALUE = '发送给朋友';
+  static const String MENU_FAVORIITE = 'MENU_MENU_FAVORIITE';
+  static const String MENU_FAVORIITE_VALUE = '收藏';
+  static const String MENU_REMIND = 'MENU_REMIND';
+  static const String MENU_REMIND_VALUE = '提醒';
+  static const String MENU_TRANSLATE = 'MENU_TRANSLATE';
+  static const String MENU_TRANSLATE_VALUE = '翻译';
+  static const String MENU_DELATE = 'MENU_DELATE';
+  static const String MENU_DELATE_VALUE = '删除';
+  static const String MENU_MULTIPE_CHOICE = 'MENU_MULTIPE_CHOICE';
+  static const String MENU_MULTIPE_CHOICE_VALUE = '多选';
 }

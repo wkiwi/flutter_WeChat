@@ -50,7 +50,7 @@ class MessagePage extends StatelessWidget {
           if(index == 0){
             return _DeviceinfoItem();
           }
-          return ConversationItem(Conversation.mockConversations[index - 1]);
+          return ConversationItem(Conversation.mockConversations[index - 1],index-1);
         },
         itemCount:  Conversation.mockConversations.length + 1,
       )

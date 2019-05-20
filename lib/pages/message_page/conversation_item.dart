@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../common/style/style.dart' show AppColors,Constants,ICons;
 import '../../model/conversation.dart';
+import '../../routers/application.dart';
 class ConversationItem extends StatelessWidget {
 
-  ConversationItem(this.conversationItemData)
+  ConversationItem(this.conversationItemData,this.index)
   :assert(conversationItemData != null);
-
+  int index;
   final Conversation conversationItemData;
   var tapPos;
   @override
@@ -14,7 +15,10 @@ class ConversationItem extends StatelessWidget {
     return Material(
       color: Color(AppColors.ConversationItemBg),
       child: InkWell(
-        onTap: (){print('打开会话:${conversationItemData.title}');},
+        onTap: (){
+          print('打开会话:${conversationItemData.title}');
+          Application.router.navigateTo(context, '/chatdetail?index=${index}');
+        },
         onTapDown: (TapDownDetails details) {
           tapPos = details.globalPosition;
         },

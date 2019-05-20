@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "moment": "^2.24.0",
+    "nodejs-websocket": "^1.7.2"
+  }
+}
