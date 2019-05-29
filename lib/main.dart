@@ -7,7 +7,6 @@ import './common/style/style.dart' show AppColors;
 import 'package:fluro/fluro.dart';
 import './routers/routers.dart';
 import './routers/application.dart';
-
 void main() { 
   var providers = Providers();
   var currentIndexProvide = CurrentIndexProvide();
@@ -25,8 +24,7 @@ class MyApp extends StatelessWidget {
     final router = Router();
     Routers.configureRouters(router);
     Application.router = router;
-    Provide.value<WebSocketProvide>(context).createWebsocket();
-    
+    Provide.value<WebSocketProvide>(context).init();
     return Container(
       child:MaterialApp(
         title: '微信',
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(AppColors.PrimaryColor),
           cardColor: Color(AppColors.CardBgColor),
           backgroundColor: Color(AppColors.BackgroundColor),
-        ),
+        ),  
         home: IndexPage(),
       )
     );

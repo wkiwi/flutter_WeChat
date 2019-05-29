@@ -5,9 +5,10 @@ import '../../model/conversation.dart';
 import '../../routers/application.dart';
 class ConversationItem extends StatelessWidget {
 
-  ConversationItem(this.conversationItemData,this.index)
+  ConversationItem(this.conversationItemData,this.index,this.type)
   :assert(conversationItemData != null);
   int index;
+  int type;
   final Conversation conversationItemData;
   var tapPos;
   @override
@@ -17,7 +18,8 @@ class ConversationItem extends StatelessWidget {
       child: InkWell(
         onTap: (){
           print('打开会话:${conversationItemData.title}');
-          Application.router.navigateTo(context, '/chatdetail?index=${index}');
+          Application.router.navigateTo(context, '/chatdetail?index=${index}&type=${type}');
+          
         },
         onTapDown: (TapDownDetails details) {
           tapPos = details.globalPosition;

@@ -5,7 +5,13 @@ console.log("开始建立连接...")
 
 let users = [];
 let conns = {};
-let groups = [];
+let groups = [
+  {
+		"id": 1111111111111,
+		"name": "flutter交流群",
+		"users": []
+	}
+];
 
 function boardcast(obj) {
   if(obj.bridge && obj.bridge.length){
@@ -45,6 +51,10 @@ var server = ws.createServer(function(conn){
         })
         if(!isuser){
           users.push({
+            nickname: obj.nickname,
+            uid: obj.uid
+          });
+          groups[0].users.push({ //默认加入flutter交流群
             nickname: obj.nickname,
             uid: obj.uid
           });
@@ -122,5 +132,5 @@ var server = ws.createServer(function(conn){
   conn.on("error", function (code, reason) {
     console.log("异常关闭")
   });
-}).listen(8001)
+}).listen(3001)
 console.log("WebSocket建立完毕")

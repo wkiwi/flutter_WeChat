@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
+import '../provide/websocket.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../common/style/style.dart';
 import './chat_detail/chat_content_view.dart';
 import '../model/conversation.dart';
+
+
 class ChatDetailPage extends StatefulWidget {
+  int type;
   int index;
-  ChatDetailPage(this.index);
+  ChatDetailPage(this.index,this.type);
   @override
-  _ChatDetailPageState createState() => _ChatDetailPageState(Conversation.mockConversations[index]);
+  _ChatDetailPageState createState() => _ChatDetailPageState(Conversation.mockConversations[index],type,index);
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   ScrollController _scrollController;
   bool hasText = false;
+  int type;
+  int index;
   Conversation data;
-  _ChatDetailPageState(this.data);
-  final messageList = [
+  _ChatDetailPageState(this.data,this.type,this.index);
+  var messageList = [
     {'type':0,'text':'hello',},
     {'type':1,'text':'hello',},
     {'type':0,'text':'Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。 Flutter可以与现有的代码一起工作。在全世界，Flutter正在被越来越多的开发者和组织使用，并且Flutter是完全免费、开源的。',},
@@ -32,6 +38,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   void _handleSubmitted(String text) {
       if (controller.text.length > 0) {
         print('发送${text}');
+        if(type == 1){
+          Provide.value<WebSocketProvide>(context).sendMessage(2,text,index);
+        }
         setState(() {
           hasText = false;
           messageList.add({'type':1,'text':text,});
@@ -48,9 +57,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     super.initState();
     _scrollController = new ScrollController();
     // _jumpBottom();
+    print(11111);
   }
   @override
   Widget build(BuildContext context) {
+    data = Provide.value<WebSocketProvide>(context).messageList[index];
     return Scaffold(
       appBar: AppBar(
         centerTitle:false,
@@ -76,17 +87,47 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         color: Color(AppColors.ChatDetailBg),
         child: Column(
           children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                controller: _scrollController,
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                return ChatContentView(
-                  type:messageList[index]['type'],text:messageList[index]['text'],avatar:messageList[index]['type'] == 0 ? data.avatar: '',isNetwork: messageList[index]['type'] == 0 ? data.isAvatarFromNet() : false,username:data.title,userType:data.type);
-              },
-              itemCount: messageList.length,
-              )
-            ),
+            Provide<WebSocketProvide>(
+              builder: (context,child,val){
+                List<Map<String, Object>>list = [];
+                if(type == 1){
+                  messageList = [];
+                  var historyMessage = Provide.value<WebSocketProvide>(context).historyMessage;
+                  print(22222);
+                  for(var i = 0; i< historyMessage.length; i++){
+                    if(data.userId != null){
+                      if(historyMessage[i]['bridge'].contains(data.userId)){
+                        if(historyMessage[i]['uid'] == data.userId){
+                          list.add({'type':0,'text':historyMessage[i]['msg'],'nickname':historyMessage[i]['nickname']});
+                        }else{
+                          list.add({'type':1,'text':historyMessage[i]['msg'],'nickname':historyMessage[i]['nickname']});
+                        }
+                      }
+                    }else if(data.groupId != null && data.groupId == historyMessage[i]['groupId'] && historyMessage[i]['bridge'].length==0){
+                      var uid = Provide.value<WebSocketProvide>(context).uid;
+                      if(historyMessage[i]['uid'] != uid ){
+                        list.add({'type':0,'text':historyMessage[i]['msg'],'nickname':historyMessage[i]['nickname']});
+                      }else{
+                        list.add({'type':1,'text':historyMessage[i]['msg'],'nickname':historyMessage[i]['nickname']});
+                      }
+                    }
+                  }
+                }
+                return Expanded(
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                    if(type == 1){
+                      return ChatContentView(type:list[index]['type'],text:list[index]['text'],avatar:list[index]['type'] == 0 ? data.avatar: '',isNetwork: list[index]['type'] == 0 ? data.isAvatarFromNet() : false,username:list[index]['nickname'],userType:data.type);
+                    }else{
+                      return ChatContentView(type:messageList[index]['type'],text:messageList[index]['text'],avatar:messageList[index]['type'] == 0 ? data.avatar: '',isNetwork: messageList[index]['type'] == 0 ? data.isAvatarFromNet() : false,username:data.title,userType:data.type);
+                    }
+                  },
+                  itemCount:type == 1 ? list.length : messageList.length ,
+                  )
+                );
+            }),
             Container(
               padding: EdgeInsets.only(top: ScreenUtil().setHeight(2.0), bottom:ScreenUtil().setHeight(2.0),left: 0,right: 0),
               color: Color(0xFFF7F7F7),
