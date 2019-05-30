@@ -49,6 +49,8 @@ class MessagePage extends StatelessWidget {
     return Provide<WebSocketProvide>(
       builder: (context,child,val){
         var messageList = Provide.value<WebSocketProvide>(context).messageList;
+        var length = Conversation.mockConversations.length + 1 + messageList.length;
+        print(length);
         return Container(
           child: ListView.builder(
             itemBuilder:  (BuildContext context, int index){
@@ -56,12 +58,12 @@ class MessagePage extends StatelessWidget {
                 return _DeviceinfoItem();
               } else if (index < Conversation.mockConversations.length + 1){
                 return ConversationItem(Conversation.mockConversations[index - 1],index-1,0);
-              }else{
+              }else {
                 var inde = index - 1 - Conversation.mockConversations.length;
                 return ConversationItem(messageList[inde],inde,1);
               }
             },
-            itemCount:  Conversation.mockConversations.length + 1 + messageList.length ,
+            itemCount: length ,
           )
         );
       }

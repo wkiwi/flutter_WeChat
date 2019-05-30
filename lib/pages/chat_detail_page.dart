@@ -12,7 +12,7 @@ class ChatDetailPage extends StatefulWidget {
   int index;
   ChatDetailPage(this.index,this.type);
   @override
-  _ChatDetailPageState createState() => _ChatDetailPageState(Conversation.mockConversations[index],type,index);
+  _ChatDetailPageState createState() => _ChatDetailPageState(type,index);
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
@@ -21,7 +21,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   int type;
   int index;
   Conversation data;
-  _ChatDetailPageState(this.data,this.type,this.index);
+  _ChatDetailPageState(this.type,this.index);
   var messageList = [
     {'type':0,'text':'hello',},
     {'type':1,'text':'hello',},
@@ -57,11 +57,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     super.initState();
     _scrollController = new ScrollController();
     // _jumpBottom();
-    print(11111);
   }
   @override
   Widget build(BuildContext context) {
-    data = Provide.value<WebSocketProvide>(context).messageList[index];
+    if(type ==1){
+      data = Provide.value<WebSocketProvide>(context).messageList[index];
+    }else{
+      data = Conversation.mockConversations[index];
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle:false,
@@ -93,7 +96,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 if(type == 1){
                   messageList = [];
                   var historyMessage = Provide.value<WebSocketProvide>(context).historyMessage;
-                  print(22222);
                   for(var i = 0; i< historyMessage.length; i++){
                     if(data.userId != null){
                       if(historyMessage[i]['bridge'].contains(data.userId)){
