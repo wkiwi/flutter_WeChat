@@ -8,6 +8,10 @@
 
 项目内提供了固定的websocket后端服务，可修改为本地server服务端口
 
+## 安卓APK下载
+快来下载进入APP，在群里聊骚吧，哈哈......
+| 下载二维码   | ![下载二维码](https://raw.githubusercontent.com/wkiwi/flutter_WeChat/master/assets/demo/ercode.png "下载二维码")   |
+
 ## 项目成果预览
 
 | 页面   |  图片  | 页面   | 图片   |
