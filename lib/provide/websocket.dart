@@ -15,6 +15,7 @@ class WebSocketProvide with ChangeNotifier{
   var historyMessage = [];//接收到哦的所有的历史消息
   var messageList = []; // 所有消息页面人员
   var currentMessageList = [];//选择进入详情页的消息历史记录
+  var connecting = false;//websocket连接状态
   IOWebSocketChannel channel;
   
   
@@ -55,10 +56,11 @@ class WebSocketProvide with ChangeNotifier{
     String text = json.encode(obj).toString();
     channel.sink.add(text);
     //监听到服务器返回消息
-    channel.stream.listen((data) => listenMessage(data));
+    channel.stream.listen((data) => listenMessage(data),onError: onError,onDone: onDone);
   }
-
+    
   listenMessage(data){
+    connecting = true;
     var obj = jsonDecode(data);
     print(data);
     if(obj['type'] == 1){ // 获取聊天室的人员与群列表
@@ -147,6 +149,15 @@ class WebSocketProvide with ChangeNotifier{
     String text = json.encode(obj).toString();
     print(text);
     channel.sink.add(text);
+  }
+  onError(error){
+    print('error------------>${error}');
+  }
+
+  void onDone() {
+    print('websocket断开了');
+    createWebsocket();
+    print('websocket重连');
   }
 
   closeWebSocket(){//关闭链接
